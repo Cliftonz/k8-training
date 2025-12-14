@@ -28,7 +28,9 @@ spec:
                   values:
                   - pod-info
               topologyKey: kubernetes.io/hostname
-      tolerations:
+      # kubectl taint nodes docker-desktop maintenance-
+      #kubectl taint nodes docker-desktop maintenance=planned:NoExecute
+      tolerations: 
       - key: dedicated
         operator: Equal
         value: pod-info
@@ -36,7 +38,7 @@ spec:
       - key: maintenance
         operator: Exists
         effect: NoExecute
-        tolerationSeconds: 300
+        tolerationSeconds: 30
       containers:
       - name: pod-info-container
         image: kimschles/pod-info-app:latest
